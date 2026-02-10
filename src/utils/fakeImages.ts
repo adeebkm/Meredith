@@ -51,6 +51,11 @@ export const getFakeImageUrl = (resultId: string, type: 'avatar' | 'thumbnail' |
     return 'https://media.licdn.com/dms/image/v2/D5635AQFPnMUNW0T8Fg/profile-framedphoto-shrink_800_800/B56ZnLKuZlKMAg-/0/1760050210667?e=1770764400&v=beta&t=9WxdxjAnLYBGMS9feRHeccWfyvVJUZmBv7A8c662xnk';
   }
 
+  // Use profile picture from Photos folder for Meredith Mueller (White American Female)
+  if ((resultId.toLowerCase().includes('meredith') || resultId.toLowerCase().includes('meredith2')) && (type === 'avatar' || type === 'thumbnail')) {
+    return getPersonaProfilePicture('White American', 'Female');
+  }
+  
   // Use specific image for Adeeb as requested
   if (resultId.toLowerCase().includes('adeeb') && (type === 'avatar' || type === 'thumbnail')) {
     return 'https://media.licdn.com/dms/image/v2/C5603AQH4Q23H_95Dqg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1610555050464?e=2147483647&v=beta&t=vtqWB22HLJsxpwC8ldRKBnxoaYH3StgycW0YAv6ZeLA';
@@ -71,25 +76,19 @@ export const getFakeVideoThumbnail = (videoId: string): string => {
 };
 
 /**
- * Get photos from Photos folder based on race and gender
+ * Get a single profile picture from Photos folder based on race and gender
  */
-export const getPersonaPhotos = (race: 'White American' | 'African American', gender: 'Male' | 'Female'): string[] => {
+export const getPersonaProfilePicture = (race: 'White American' | 'African American', gender: 'Male' | 'Female'): string => {
   const raceFolder = race === 'White American' ? 'Race - White' : 'Race - Black';
   const genderFolder = gender === 'Male' ? 'Male' : 'Female';
   const basePath = `/Photos/${raceFolder} - ${genderFolder}`;
   
-  // Select 5 photos based on race and gender
+  // Select 1 profile picture based on race and gender
   if (race === 'White American' && gender === 'Female') {
-    return [
-      `${basePath}/0a4c02fe-e683-4f7c-a73e-96722fc32bd0.jpg`,
-      `${basePath}/182e87b4-3e2f-4544-bbf1-34633bd7dcba.jpg`,
-      `${basePath}/2ded4a6c-1244-4ec7-ac9d-a0d4da6c41b1.jpg`,
-      `${basePath}/41c58451-83d9-4461-8972-0e567cce6ef9.jpg`,
-      `${basePath}/426236a4-db77-4860-afb6-38ae60060f47.jpg`
-    ];
+    return `${basePath}/0a4c02fe-e683-4f7c-a73e-96722fc32bd0.jpg`;
   }
   
-  return [];
+  return '';
 };
 
 
