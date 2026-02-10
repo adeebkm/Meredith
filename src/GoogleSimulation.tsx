@@ -123,6 +123,18 @@ const GoogleSimulation: React.FC<GoogleSimulationProps> = ({ searchType = 'mered
                               id: 'meredith-img-1',
                               title: 'Meredith Mueller – LinkedIn',
                               source: 'LinkedIn',
+                              imageUrl: 'https://www.eyecenters.com/wp-content/uploads/Meredith_Mueller_Blue.jpg'
+                            },
+                            {
+                              id: 'meredith-img-2',
+                              title: 'Meredith Mueller – Facebook',
+                              source: 'Facebook',
+                              imageUrl: 'https://pbs.twimg.com/profile_images/1178073019983552512/Q74w_Ppc_400x400.jpg'
+                            },
+                            {
+                              id: 'meredith-img-3',
+                              title: 'Meredith Mueller – Profile',
+                              source: 'Professional Network',
                               imageUrl: '/Photos/Race - White - Female/0a4c02fe-e683-4f7c-a73e-96722fc32bd0.jpg'
                             }
                           ]}
