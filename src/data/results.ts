@@ -1692,8 +1692,8 @@ export const RESULTS_Greg_Krieger: SimResult[] = [
   {
     id: "greg5",
     platform: "LinkedIn",
-    displayName: "Gregory Krieger - dsm-firmenich",
-    snippet: "590+ followers · Blairstown, New Jersey, United States · dsm-firmenich · Experience: dsm-firmenich · Education: Lafayette College · Location: Blairstown · 500+ connections on LinkedIn. View Gregory Krieger's profile on LinkedIn, ...",
+    displayName: "Gregory Krieger - Midwest Capital Advisors",
+    snippet: "350+ followers · Chicago, Illinois, United States · Midwest Capital Advisors · Experience: Midwest Capital Advisors · Education: University of Michigan · Location: Chicago · 450+ connections on LinkedIn. View Gregory Krieger's profile on LinkedIn, ...",
     urlLike: "LinkedIn · Gregory Krieger",
     discoverability: "High",
     footprint: "Present",
@@ -2289,6 +2289,19 @@ export const RESULTS_Meredith_Mueller: SimResult[] = [
     imageKey: "meredith-linkedin-dir"
   },
   {
+    id: "meredith6",
+    platform: "LinkedIn",
+    displayName: "Meredith Mueller - Great Lakes Financial Services",
+    snippet: "280+ followers · Chicago, Illinois, United States · Great Lakes Financial Services · Experience: Great Lakes Financial Services · Education: University of Michigan · Location: Chicago · 320+ connections on LinkedIn. View Meredith Mueller's profile on LinkedIn, ...",
+    urlLike: "LinkedIn · Meredith Mueller",
+    discoverability: "High",
+    footprint: "Present",
+    race: "White American",
+    location: "Chicago, Illinois",
+    followers: "280+",
+    imageKey: "meredith-linkedin-profile"
+  },
+  {
     id: "meredith2",
     platform: "Facebook",
     displayName: "Meredith Mueller in people",
@@ -2336,19 +2349,6 @@ export const RESULTS_Meredith_Mueller: SimResult[] = [
     race: "White American",
     location: "Louisville",
     imageKey: "meredith-optometry"
-  },
-  {
-    id: "meredith6",
-    platform: "LinkedIn",
-    displayName: "Meredith Mueller - The Lawrence Company",
-    snippet: "110+ followers · Los Angeles, California, United States · The Lawrence Company · I am a seasoned events producer and project manager with twenty years of experience… · Experience: The Lawrence Company · Education: Vassar College ...",
-    urlLike: "LinkedIn · Meredith Mueller",
-    discoverability: "High",
-    footprint: "Present",
-    race: "White American",
-    location: "Los Angeles, California",
-    followers: "110+",
-    imageKey: "meredith-linkedin-profile"
   },
   {
     id: "meredith7",
