@@ -10,7 +10,14 @@ interface FacebookProfileProps {
 export const FacebookProfileView: React.FC<FacebookProfileProps> = ({ resultId, onClose }) => {
   const [showStickyHeader, setShowStickyHeader] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('All');
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   React.useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -58,17 +65,20 @@ export const FacebookProfileView: React.FC<FacebookProfileProps> = ({ resultId, 
       }}
     >
       {/* Top Navbar */}
-      <div style={{ backgroundColor: 'white', borderBottom: '1px solid #ddd', position: 'sticky', top: 0, zIndex: 100, height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px' }}>
+      <div style={{ backgroundColor: 'white', borderBottom: '1px solid #ddd', position: 'sticky', top: 0, zIndex: 100, height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: isMobile ? '0 8px' : '0 16px' }}>
         {/* Left side: Logo and Search */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: isMobile ? 'none' : 1 }}>
           <svg width="40" height="40" viewBox="0 0 40 40" fill="#1877f2"><circle cx="20" cy="20" r="20"/><path d="M27.5 20.5h-4.5v14h-5v-14h-3v-4.5h3v-3c0-2.5 1-4.5 4.5-4.5h4.5v4.5h-3v3h3v4.5z" fill="white"/></svg>
-          <div style={{ backgroundColor: '#f0f2f5', borderRadius: '20px', padding: '8px 12px', display: 'flex', alignItems: 'center', width: '240px', height: '40px' }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="#65676b" style={{ marginRight: '8px' }}><path d="M11.435 10.063h-.723l-.256-.247a5.92 5.92 0 001.437-3.87 5.946 5.946 0 10-5.947 5.947 5.92 5.92 0 003.87-1.437l.247.256v.723L14.637 16 16 14.637l-4.565-4.574zm-5.489 0A4.111 4.111 0 011.83 5.946 4.111 4.111 0 016.946 1.83 4.111 4.111 0 0111.057 5.946 4.111 4.111 0 016.946 10.063z"/></svg>
-            <input type="text" placeholder="Search Facebook" style={{ background: 'none', border: 'none', fontSize: '15px', outline: 'none', width: '100%' }} />
-          </div>
+          {!isMobile && (
+            <div style={{ backgroundColor: '#f0f2f5', borderRadius: '20px', padding: '8px 12px', display: 'flex', alignItems: 'center', width: '240px', height: '40px' }}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="#65676b" style={{ marginRight: '8px' }}><path d="M11.435 10.063h-.723l-.256-.247a5.92 5.92 0 001.437-3.87 5.946 5.946 0 10-5.947 5.947 5.92 5.92 0 003.87-1.437l.247.256v.723L14.637 16 16 14.637l-4.565-4.574zm-5.489 0A4.111 4.111 0 011.83 5.946 4.111 4.111 0 016.946 1.83 4.111 4.111 0 0111.057 5.946 4.111 4.111 0 016.946 10.063z"/></svg>
+              <input type="text" placeholder="Search Facebook" style={{ background: 'none', border: 'none', fontSize: '15px', outline: 'none', width: '100%' }} />
+            </div>
+          )}
         </div>
 
         {/* Center: Main Navigation Icons */}
+        {!isMobile && (
         <div style={{ display: 'flex', flex: 1, justifyContent: 'center', height: '100%' }}>
           {[
             { id: 'home', icon: <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /> },
@@ -89,10 +99,11 @@ export const FacebookProfileView: React.FC<FacebookProfileProps> = ({ resultId, 
             </div>
           ))}
         </div>
+        )}
 
         {/* Right side: Tools and Profile */}
-        <div style={{ display: 'flex', gap: '8px', flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
-          {[
+        <div style={{ display: 'flex', gap: '8px', flex: isMobile ? 'none' : 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+          {!isMobile && [
             <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z" />,
             <path d="M12 2C6.48 2 2 6.48 2 12c0 2.02.6 3.9 1.61 5.48L2.03 22l4.52-1.58C8.1 21.4 9.98 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z" />,
             <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
@@ -105,7 +116,10 @@ export const FacebookProfileView: React.FC<FacebookProfileProps> = ({ resultId, 
             <img src={getFakeImageUrl(resultId, 'avatar')} style={{ width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer' }} alt="" />
             <div style={{ position: 'absolute', bottom: 0, right: 0, width: '12px', height: '12px', backgroundColor: '#31a24c', borderRadius: '50%', border: '2px solid white' }} />
           </div>
-          <button onClick={onClose} style={{ marginLeft: '8px', padding: '4px 8px', borderRadius: '4px', border: '1px solid #ddd', background: 'white', cursor: 'pointer' }}>Close</button>
+          <button onClick={onClose} style={{ padding: '6px 12px', borderRadius: '6px', border: '1px solid #ddd', background: '#e4e6eb', cursor: 'pointer', fontWeight: 600, fontSize: '14px' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ verticalAlign: 'middle', marginRight: '4px' }}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to search
+          </button>
         </div>
       </div>
 
@@ -134,19 +148,19 @@ export const FacebookProfileView: React.FC<FacebookProfileProps> = ({ resultId, 
       <div style={{ backgroundColor: 'white' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           {/* Cover Photo Area */}
-          <div style={{ height: '400px', backgroundColor: '#f0f2f5', borderRadius: '0 0 8px 8px', position: 'relative' }}>
+          <div style={{ height: isMobile ? '200px' : '400px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: '0 0 8px 8px', position: 'relative' }}>
           </div>
 
           {/* Profile Identity Area */}
-          <div style={{ padding: '0 32px 32px', marginTop: '-32px', display: 'flex', alignItems: 'flex-end', gap: '16px' }}>
+          <div style={{ padding: isMobile ? '0 12px 16px' : '0 32px 32px', marginTop: isMobile ? '-24px' : '-32px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'center' : 'flex-end', gap: '16px' }}>
             <div style={{ position: 'relative' }}>
-              <img src={getFakeImageUrl(resultId, 'avatar')} style={{ width: '168px', height: '168px', borderRadius: '50%', border: '4px solid white', backgroundColor: 'white' }} alt="" />
+              <img src={getFakeImageUrl(resultId, 'avatar')} style={{ width: isMobile ? '100px' : '168px', height: isMobile ? '100px' : '168px', borderRadius: '50%', border: '4px solid white', backgroundColor: 'white' }} alt="" />
             </div>
-            <div style={{ flex: 1, paddingBottom: '16px' }}>
-              <h1 style={{ fontSize: '32px', fontWeight: 700, margin: 0 }}>{profile.name}</h1>
-              <div style={{ fontSize: '16px', color: '#65676b', fontWeight: 600 }}>{profile.friends}</div>
+            <div style={{ flex: 1, paddingBottom: isMobile ? '0' : '16px', textAlign: isMobile ? 'center' : 'left' }}>
+              <h1 style={{ fontSize: isMobile ? '24px' : '32px', fontWeight: 700, margin: 0 }}>{profile.name}</h1>
+              <div style={{ fontSize: isMobile ? '14px' : '16px', color: '#65676b', fontWeight: 600 }}>{profile.friends}</div>
             </div>
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', gap: '8px', marginBottom: isMobile ? '0' : '16px' }}>
               <button style={{ backgroundColor: '#1877f2', color: 'white', border: 'none', borderRadius: '6px', padding: '8px 16px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                 Add friend
@@ -162,7 +176,7 @@ export const FacebookProfileView: React.FC<FacebookProfileProps> = ({ resultId, 
           </div>
 
           {/* Profile Tabs */}
-          <div style={{ padding: '0 32px', display: 'flex', borderTop: '1px solid #ddd' }}>
+          <div style={{ padding: isMobile ? '0 8px' : '0 32px', display: 'flex', borderTop: '1px solid #ddd', overflowX: 'auto', whiteSpace: 'nowrap' as const }}>
             {['All', 'About', 'Friends', 'Photos', 'Check-ins', 'More'].map((tab, i) => (
               <div 
                 key={tab} 
@@ -187,11 +201,11 @@ export const FacebookProfileView: React.FC<FacebookProfileProps> = ({ resultId, 
       </div>
 
       {/* Main Content */}
-      <div style={{ maxWidth: '1100px', margin: '16px auto', padding: '0 16px' }}>
+      <div style={{ maxWidth: '1100px', margin: '16px auto', padding: isMobile ? '0 8px' : '0 16px' }}>
         {activeTab === 'All' ? (
-          <div style={{ display: 'flex', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '16px' }}>
             {/* Left Sidebar: Photos */}
-            <div style={{ width: '400px', flexShrink: 0 }}>
+            <div style={{ width: isMobile ? '100%' : '400px', flexShrink: 0 }}>
 
               {/* Footer Links */}
               <div style={{ color: '#65676b', fontSize: '13px', padding: '0 16px' }}>
