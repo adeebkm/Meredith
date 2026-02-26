@@ -5,7 +5,7 @@ import { ResultCard } from './components/ResultCard';
 import { LinkedInProfileView as LinkedInProfile } from './components/LinkedInProfile';
 import { FacebookProfileView as FacebookProfile } from './components/FacebookProfile';
 import { PeopleAlsoSearchFor } from './components/PeopleAlsoSearchFor';
-import { ImagesSection } from './components/ImagesSection';
+
 import {
   RESULTS_Meredith_Mueller,
   type SimResult
@@ -186,35 +186,8 @@ const GoogleSimulation: React.FC<GoogleSimulationProps> = ({ searchType = 'mered
             ) : (
               <div>
                 {paginatedResults.map((result, index) => {
-                  const shouldShowMeredithImages = currentPage === 1 && index === 0;
-                  
                   return (
                     <React.Fragment key={result.id}>
-                      {shouldShowMeredithImages && (
-                        <ImagesSection
-                          images={[
-                            {
-                              id: 'meredith-img-1',
-                              title: 'Meredith Mueller – LinkedIn',
-                              source: 'LinkedIn',
-                              imageUrl: 'https://www.eyecenters.com/wp-content/uploads/Meredith_Mueller_Blue.jpg'
-                            },
-                            {
-                              id: 'meredith-img-2',
-                              title: 'Meredith Mueller – Facebook',
-                              source: 'Facebook',
-                              imageUrl: 'https://pbs.twimg.com/profile_images/1178073019983552512/Q74w_Ppc_400x400.jpg'
-                            },
-                            {
-                              id: 'meredith-img-3',
-                              title: 'Meredith Mueller – Profile',
-                              source: 'Professional Network',
-                              imageUrl: '/Photos/Race - White - Female/0a4c02fe-e683-4f7c-a73e-96722fc32bd0.jpg'
-                            }
-                          ]}
-                          isDark={isDark}
-                        />
-                      )}
                       <ResultCard
                         result={result}
                         onOpen={(result) => {
